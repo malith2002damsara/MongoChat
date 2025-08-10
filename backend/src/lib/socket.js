@@ -9,7 +9,7 @@ const io = new Server(server, {
   cors: {
     origin: process.env.NODE_ENV === "production" 
       ? [
-          "https://chat-app-desktop-frontend.vercel.app",
+          "https://mongochatfrontend.vercel.app",
           "http://localhost:5173"
         ]
       : ["http://localhost:5173"],
