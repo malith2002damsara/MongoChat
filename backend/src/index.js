@@ -21,7 +21,7 @@ app.use(
   cors({
     origin: process.env.NODE_ENV === "production" 
       ? [
-          "https://mongochatfrontend.vercel.app",
+          "https://mongochatfrontend.vercel.app/login",
           "http://localhost:5173"
         ]
       : true, // Allow all origins in development
