@@ -20,10 +20,7 @@ app.use(cookieParser());
 app.use(
   cors({
     origin: process.env.NODE_ENV === "production"
-      ? [
-          "https://mongochatfrontend.vercel.app",
-          "http://localhost:5173"
-        ]
+      ? "https://mongochatfrontend.vercel.app"
       : true, // Allow all origins in development
     credentials: true, // Allow credentials (cookies, authorization headers)
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
@@ -32,6 +29,18 @@ app.use(
     optionsSuccessStatus: 204
   })
 );
+
+// Global preflight handler for Vercel
+app.options("*", cors({
+  origin: process.env.NODE_ENV === "production"
+    ? "https://mongochatfrontend.vercel.app"
+    : true,
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
+  preflightContinue: false,
+  optionsSuccessStatus: 204
+}));
 
 // API status route - shows server is working
 app.get("/", (req, res) => {
