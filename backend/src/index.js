@@ -19,13 +19,13 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(
   cors({
-    origin: process.env.NODE_ENV === "production" 
+    origin: process.env.NODE_ENV === "production"
       ? [
-          "https://mongochatfrontend.vercel.app/login",
+          "https://mongochatfrontend.vercel.app",
           "http://localhost:5173"
         ]
       : true, // Allow all origins in development
-    credentials: false, // Disable credentials for Vercel compatibility
+    credentials: true, // Allow credentials (cookies, authorization headers)
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
     preflightContinue: false,
