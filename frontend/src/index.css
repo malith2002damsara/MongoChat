@@ -1,0 +1,334 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom Dark Theme Enhancements */
+@layer base {
+  /* Global dark theme variables */
+  [data-theme="dark"] {
+    --primary: #6366f1;
+    --primary-focus: #4f46e5;
+    --primary-content: #ffffff;
+    --secondary: #f59e0b;
+    --secondary-focus: #d97706;
+    --secondary-content: #ffffff;
+    --accent: #10b981;
+    --accent-focus: #059669;
+    --accent-content: #ffffff;
+    --neutral: #1f2937;
+    --neutral-focus: #111827;
+    --neutral-content: #d1d5db;
+    --base-100: #0f172a;
+    --base-200: #1e293b;
+    --base-300: #334155;
+    --base-content: #f1f5f9;
+    --info: #3b82f6;
+    --success: #10b981;
+    --warning: #f59e0b;
+    --error: #ef4444;
+  }
+
+  /* Enhanced dark theme for better contrast */
+  [data-theme="dracula"] {
+    --primary: #bd93f9;
+    --primary-focus: #9580ff;
+    --primary-content: #282a36;
+    --secondary: #ffb86c;
+    --secondary-focus: #ff9c3d;
+    --secondary-content: #282a36;
+    --accent: #50fa7b;
+    --accent-focus: #5af78e;
+    --accent-content: #282a36;
+    --neutral: #44475a;
+    --neutral-focus: #6272a4;
+    --neutral-content: #f8f8f2;
+    --base-100: #282a36;
+    --base-200: #21222c;
+    --base-300: #191a21;
+    --base-content: #f8f8f2;
+  }
+
+  /* Custom midnight theme */
+  [data-theme="midnight"] {
+    --primary: #00d4ff;
+    --primary-focus: #0099cc;
+    --primary-content: #ffffff;
+    --secondary: #ff6b9d;
+    --secondary-focus: #ff4081;
+    --secondary-content: #ffffff;
+    --accent: #ffa726;
+    --accent-focus: #ff9800;
+    --accent-content: #000000;
+    --neutral: #2d3748;
+    --neutral-focus: #1a202c;
+    --neutral-content: #e2e8f0;
+    --base-100: #1a202c;
+    --base-200: #2d3748;
+    --base-300: #4a5568;
+    --base-content: #f7fafc;
+  }
+}
+
+@layer components {
+  /* Enhanced chat bubble styling */
+  .chat-bubble {
+    @apply backdrop-blur-sm transition-all duration-200 hover:shadow-lg;
+  }
+
+  /* Message hover effects */
+  .chat:hover .chat-bubble {
+    @apply shadow-lg;
+  }
+
+  .chat-end:hover .chat-bubble {
+    @apply shadow-primary/20;
+  }
+
+  .chat-start:hover .chat-bubble {
+    @apply shadow-base-300/40;
+  }
+
+  /* Dark theme chat bubbles */
+  [data-theme="dark"] .chat-bubble,
+  [data-theme="dracula"] .chat-bubble,
+  [data-theme="midnight"] .chat-bubble,
+  [data-theme="night"] .chat-bubble,
+  [data-theme="coffee"] .chat-bubble {
+    @apply shadow-xl border border-base-300/20;
+  }
+
+  /* Sent message styling for dark themes */
+  [data-theme="dark"] .chat-end .chat-bubble,
+  [data-theme="dracula"] .chat-end .chat-bubble,
+  [data-theme="midnight"] .chat-end .chat-bubble,
+  [data-theme="night"] .chat-end .chat-bubble,
+  [data-theme="coffee"] .chat-end .chat-bubble {
+    @apply bg-gradient-to-r from-primary to-secondary text-primary-content shadow-lg shadow-primary/25;
+  }
+
+  /* Received message styling for dark themes */
+  [data-theme="dark"] .chat-start .chat-bubble,
+  [data-theme="dracula"] .chat-start .chat-bubble,
+  [data-theme="midnight"] .chat-start .chat-bubble,
+  [data-theme="night"] .chat-start .chat-bubble,
+  [data-theme="coffee"] .chat-start .chat-bubble {
+    @apply bg-base-200 text-base-content border-base-300/30 shadow-lg backdrop-blur-sm;
+  }
+
+  /* Enhanced navbar for dark themes */
+  [data-theme="dark"] .navbar,
+  [data-theme="dracula"] .navbar,
+  [data-theme="midnight"] .navbar,
+  [data-theme="night"] .navbar,
+  [data-theme="coffee"] .navbar {
+    @apply bg-base-100/80 backdrop-blur-xl border-b border-base-300/20 shadow-lg shadow-base-300/10;
+  }
+
+  /* Enhanced sidebar for dark themes */
+  [data-theme="dark"] .sidebar,
+  [data-theme="dracula"] .sidebar,
+  [data-theme="midnight"] .sidebar,
+  [data-theme="night"] .sidebar,
+  [data-theme="coffee"] .sidebar {
+    @apply bg-base-200/50 backdrop-blur-xl border-r border-base-300/20;
+  }
+
+  /* Enhanced input styling for dark themes */
+  [data-theme="dark"] .input,
+  [data-theme="dracula"] .input,
+  [data-theme="midnight"] .input,
+  [data-theme="night"] .input,
+  [data-theme="coffee"] .input {
+    @apply bg-base-100/50 border-base-300/30 focus:border-primary/50 backdrop-blur-sm transition-all duration-200;
+  }
+
+  /* Enhanced button styling for dark themes */
+  [data-theme="dark"] .btn-primary,
+  [data-theme="dracula"] .btn-primary,
+  [data-theme="midnight"] .btn-primary,
+  [data-theme="night"] .btn-primary,
+  [data-theme="coffee"] .btn-primary {
+    @apply bg-gradient-to-r from-primary to-secondary hover:from-secondary hover:to-primary shadow-lg shadow-primary/25 border-0 transition-all duration-200 hover:shadow-xl hover:shadow-primary/40;
+  }
+
+  /* Message timestamp styling */
+  .chat-header time {
+    @apply transition-opacity duration-200;
+  }
+
+  [data-theme="dark"] .chat-header time,
+  [data-theme="dracula"] .chat-header time,
+  [data-theme="midnight"] .chat-header time,
+  [data-theme="night"] .chat-header time,
+  [data-theme="coffee"] .chat-header time {
+    @apply text-base-content/60;
+  }
+
+  /* Online status indicator */
+  .online-indicator {
+    @apply w-3 h-3 bg-success rounded-full border-2 border-base-100 shadow-sm animate-pulse;
+  }
+
+  /* Scrollbar styling for dark themes */
+  [data-theme="dark"] ::-webkit-scrollbar,
+  [data-theme="dracula"] ::-webkit-scrollbar,
+  [data-theme="midnight"] ::-webkit-scrollbar,
+  [data-theme="night"] ::-webkit-scrollbar,
+  [data-theme="coffee"] ::-webkit-scrollbar {
+    @apply w-2;
+  }
+
+  [data-theme="dark"] ::-webkit-scrollbar-track,
+  [data-theme="dracula"] ::-webkit-scrollbar-track,
+  [data-theme="midnight"] ::-webkit-scrollbar-track,
+  [data-theme="night"] ::-webkit-scrollbar-track,
+  [data-theme="coffee"] ::-webkit-scrollbar-track {
+    @apply bg-base-200;
+  }
+
+  [data-theme="dark"] ::-webkit-scrollbar-thumb,
+  [data-theme="dracula"] ::-webkit-scrollbar-thumb,
+  [data-theme="midnight"] ::-webkit-scrollbar-thumb,
+  [data-theme="night"] ::-webkit-scrollbar-thumb,
+  [data-theme="coffee"] ::-webkit-scrollbar-thumb {
+    @apply bg-base-300 rounded-full hover:bg-base-content/20;
+  }
+
+  /* Card and container enhancements */
+  [data-theme="dark"] .card,
+  [data-theme="dracula"] .card,
+  [data-theme="midnight"] .card,
+  [data-theme="night"] .card,
+  [data-theme="coffee"] .card {
+    @apply bg-base-100/80 backdrop-blur-xl border border-base-300/20 shadow-xl shadow-base-300/10;
+  }
+
+  /* Form elements */
+  [data-theme="dark"] .form-control label,
+  [data-theme="dracula"] .form-control label,
+  [data-theme="midnight"] .form-control label,
+  [data-theme="night"] .form-control label,
+  [data-theme="coffee"] .form-control label {
+    @apply text-base-content/90;
+  }
+
+  /* Modal enhancements */
+  [data-theme="dark"] .modal-box,
+  [data-theme="dracula"] .modal-box,
+  [data-theme="midnight"] .modal-box,
+  [data-theme="night"] .modal-box,
+  [data-theme="coffee"] .modal-box {
+    @apply bg-base-100/95 backdrop-blur-xl border border-base-300/20;
+  }
+
+  /* Toast notifications */
+  [data-theme="dark"] .toast,
+  [data-theme="dracula"] .toast,
+  [data-theme="midnight"] .toast,
+  [data-theme="night"] .toast,
+  [data-theme="coffee"] .toast {
+    @apply backdrop-blur-xl;
+  }
+}
+
+@layer utilities {
+  /* Glassmorphism effects */
+  .glass-effect {
+    @apply bg-base-100/20 backdrop-blur-xl border border-base-300/20;
+  }
+
+  .glass-dark {
+    @apply bg-base-200/30 backdrop-blur-xl border border-base-300/30;
+  }
+
+  /* Gradient text */
+  .gradient-text {
+    @apply bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent;
+  }
+
+  /* Smooth animations */
+  .animate-fade-in {
+    @apply opacity-0 animate-pulse;
+    animation: fadeIn 0.3s ease-in-out forwards;
+  }
+
+  .animate-slide-up {
+    @apply transform translate-y-4 opacity-0;
+    animation: slideUp 0.3s ease-out forwards;
+  }
+
+  .animate-scale-in {
+    @apply transform scale-95 opacity-0;
+    animation: scaleIn 0.2s ease-out forwards;
+  }
+
+  @keyframes fadeIn {
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes slideUp {
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  @keyframes scaleIn {
+    to {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+
+  /* Custom shadows for dark themes */
+  .shadow-glow {
+    box-shadow: 0 0 20px rgba(99, 102, 241, 0.3);
+  }
+
+  .shadow-glow-green {
+    box-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
+  }
+
+  .shadow-glow-amber {
+    box-shadow: 0 0 20px rgba(245, 158, 11, 0.3);
+  }
+}
+
+/* Additional theme-specific customizations */
+[data-theme="dracula"] {
+  .chat-end .chat-bubble {
+    background: linear-gradient(135deg, #bd93f9, #ff79c6) !important;
+  }
+}
+
+[data-theme="midnight"] {
+  .chat-end .chat-bubble {
+    background: linear-gradient(135deg, #00d4ff, #ff6b9d) !important;
+  }
+}
+
+[data-theme="cyberpunk"] {
+  .chat-end .chat-bubble {
+    background: linear-gradient(135deg, #ff0080, #00ff80) !important;
+    box-shadow: 0 0 15px rgba(255, 0, 128, 0.4);
+  }
+}
+
+/* Loading animations */
+.loading-pulse {
+  @apply animate-pulse;
+}
+
+.loading-skeleton {
+  @apply bg-base-300 animate-pulse rounded;
+}
+
+[data-theme="dark"] .loading-skeleton,
+[data-theme="dracula"] .loading-skeleton,
+[data-theme="midnight"] .loading-skeleton,
+[data-theme="night"] .loading-skeleton,
+[data-theme="coffee"] .loading-skeleton {
+  @apply bg-base-300/50;
+}
