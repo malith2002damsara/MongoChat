@@ -29,7 +29,7 @@ export const useAuthStore = create((set, get) => ({
         return;
       }
       
-  const checkPath = import.meta.env.MODE === "development" ? "/auth/check" : "/api/auth/check";
+  const checkPath = import.meta.env.MODE === "development" ? "/auth/check" : "/auth/check";
   console.log('CheckAuth - Making request to', checkPath);
   const res = await axiosInstance.get(checkPath);
       console.log('CheckAuth - Success:', res.data);
@@ -54,7 +54,7 @@ export const useAuthStore = create((set, get) => ({
     set({ isSigningUp: true });
     try {
       console.log('Attempting signup with:', data);
-  const signupPath = import.meta.env.MODE === "development" ? "/auth/signup" : "/api/auth/signup";
+  const signupPath = import.meta.env.MODE === "development" ? "/auth/signup" : "/auth/signup";
   const res = await axiosInstance.post(signupPath, data);
       console.log('Signup successful:', res.data);
       console.log('Token received:', !!res.data.token);
@@ -107,7 +107,7 @@ export const useAuthStore = create((set, get) => ({
     set({ isLoggingIn: true });
     try {
       console.log('Attempting login with:', data);
-      const loginPath = import.meta.env.MODE === "development" ? "/auth/login" : "/api/auth/login";
+  const loginPath = import.meta.env.MODE === "development" ? "/auth/login" : "/auth/login";
       const res = await axiosInstance.post(loginPath, data);
       console.log('Login successful:', res.data);
       console.log('Token received:', !!res.data.token);
@@ -167,7 +167,7 @@ export const useAuthStore = create((set, get) => ({
 
   logout: async () => {
     try {
-  const logoutPath = import.meta.env.MODE === "development" ? "/auth/logout" : "/api/auth/logout";
+  const logoutPath = import.meta.env.MODE === "development" ? "/auth/logout" : "/auth/logout";
   await axiosInstance.post(logoutPath);
       
       // Clear token and auth header
@@ -192,7 +192,7 @@ export const useAuthStore = create((set, get) => ({
   updateProfile: async (data) => {
     set({ isUpdatingProfile: true });
     try {
-  const updateProfilePath = import.meta.env.MODE === "development" ? "/auth/update-profile" : "/api/auth/update-profile";
+  const updateProfilePath = import.meta.env.MODE === "development" ? "/auth/update-profile" : "/auth/update-profile";
   const res = await axiosInstance.put(updateProfilePath, data);
       set({ authUser: res.data });
       
