@@ -14,12 +14,13 @@ const io = new Server(server, {
     credentials: false,
     allowedHeaders: ["Content-Type", "Authorization"]
   },
-  transports: ["websocket", "polling"],
-  allowEIO3: true, // Enable compatibility with older clients
-  pingTimeout: 30000, // Reduce ping timeout for faster detection
-  pingInterval: 10000, // More frequent pings for better real-time performance
-  upgradeTimeout: 5000, // Faster upgrade timeout
-  maxHttpBufferSize: 1e6, // 1MB limit for faster message processing
+  transports: ["polling", "websocket"], // Prioritize polling for Vercel
+  allowEIO3: true,
+  pingTimeout: 60000, // Increase for serverless
+  pingInterval: 25000, // Increase for serverless
+  upgradeTimeout: 10000,
+  maxHttpBufferSize: 1e6,
+  path: "/socket.io/", // Explicit path
 });
 
 export function getReceiverSocketId(userId) {

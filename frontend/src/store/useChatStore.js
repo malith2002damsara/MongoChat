@@ -17,7 +17,7 @@ export const useChatStore = create((set, get) => ({
   getUsers: async () => {
     set({ isUsersLoading: true });
     try {
-  const usersPath = import.meta.env.MODE === "development" ? "/messages/users" : "/api/messages/users";
+  const usersPath = import.meta.env.MODE === "development" ? "/messages/users" : "/messages/users";
   const res = await axiosInstance.get(usersPath);
       set({ users: res.data });
     } catch (error) {
@@ -30,7 +30,7 @@ export const useChatStore = create((set, get) => ({
   getMessages: async (userId) => {
     set({ isMessagesLoading: true });
     try {
-  const messagesPath = import.meta.env.MODE === "development" ? `/messages/${userId}` : `/api/messages/${userId}`;
+  const messagesPath = import.meta.env.MODE === "development" ? `/messages/${userId}` : `/messages/${userId}`;
   const res = await axiosInstance.get(messagesPath);
       const messages = res.data;
       set({ 
@@ -54,10 +54,10 @@ export const useChatStore = create((set, get) => ({
     const url = lastMessageTime 
     ? (import.meta.env.MODE === "development" 
       ? `/messages/${selectedUser._id}/new?since=${lastMessageTime}` 
-      : `/api/messages/${selectedUser._id}/new?since=${lastMessageTime}`)
+      : `/messages/${selectedUser._id}/new?since=${lastMessageTime}`)
     : (import.meta.env.MODE === "development" 
       ? `/messages/${selectedUser._id}` 
-      : `/api/messages/${selectedUser._id}`);
+      : `/messages/${selectedUser._id}`);
         
       const res = await axiosInstance.get(url);
       const newMessages = res.data;
@@ -123,7 +123,7 @@ export const useChatStore = create((set, get) => ({
       set({ messages: [...messages, tempMessage] });
 
       // Send message to server
-  const sendPath = import.meta.env.MODE === "development" ? `/messages/send/${selectedUser._id}` : `/api/messages/send/${selectedUser._id}`;
+  const sendPath = import.meta.env.MODE === "development" ? `/messages/send/${selectedUser._id}` : `/messages/send/${selectedUser._id}`;
   const res = await axiosInstance.post(sendPath, messageData);
       
       // Replace optimistic message with real message
@@ -150,7 +150,7 @@ export const useChatStore = create((set, get) => ({
 
   deleteMessage: async (messageId) => {
     try {
-  const deletePath = import.meta.env.MODE === "development" ? `/messages/delete/${messageId}` : `/api/messages/delete/${messageId}`;
+  const deletePath = import.meta.env.MODE === "development" ? `/messages/delete/${messageId}` : `/messages/delete/${messageId}`;
   await axiosInstance.delete(deletePath);
       
       // Remove message from local state immediately
@@ -168,7 +168,7 @@ export const useChatStore = create((set, get) => ({
     if (!selectedUser) return;
     
     try {
-  const clearPath = import.meta.env.MODE === "development" ? `/messages/clear/${selectedUser._id}` : `/api/messages/clear/${selectedUser._id}`;
+  const clearPath = import.meta.env.MODE === "development" ? `/messages/clear/${selectedUser._id}` : `/messages/clear/${selectedUser._id}`;
   const res = await axiosInstance.delete(clearPath);
       
       // Remove all sent messages from local state

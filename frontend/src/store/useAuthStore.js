@@ -224,11 +224,16 @@ export const useAuthStore = create((set, get) => ({
       query: {
         userId: authUser._id,
       },
-      transports: ["websocket", "polling"],
-      timeout: 10000, // Reduce timeout for faster connection
+      transports: ["polling", "websocket"], // Start with polling for Vercel
+      timeout: 20000, // Increase timeout for serverless
       forceNew: true,
-      upgrade: true, // Allow transport upgrades for better performance
-      rememberUpgrade: true // Remember the upgraded transport
+      upgrade: true,
+      rememberUpgrade: false, // Don't remember upgrades for serverless
+      autoConnect: true,
+      reconnection: true,
+      reconnectionAttempts: 5,
+      reconnectionDelay: 1000,
+      path: "/socket.io/" // Explicit path
     });
     
     // Add connection event listeners for better debugging

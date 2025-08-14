@@ -8,6 +8,10 @@
   ],
   "routes": [
     {
+      "src": "/socket.io/(.*)",
+      "dest": "src/index.js"
+    },
+    {
       "src": "/api/(.*)",
       "dest": "src/index.js"
     },
@@ -16,5 +20,10 @@
       "dest": "src/index.js",
       "methods": ["GET"]
     }
-  ]
+  ],
+  "functions": {
+    "src/index.js": {
+      "maxDuration": 30
+    }
+  }
 }
