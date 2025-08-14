@@ -29,7 +29,7 @@ export const useChatStore = create((set, get) => ({
   getMessages: async (userId) => {
     set({ isMessagesLoading: true });
     try {
-      const res = await axiosInstance.get(`/messages/${userId}`);
+  const res = await axiosInstance.get(`/api/messages/${userId}`);
       const messages = res.data;
       set({ 
         messages,
@@ -50,8 +50,8 @@ export const useChatStore = create((set, get) => ({
     try {
       // Use the new endpoint to only get messages since last known message
       const url = lastMessageTime 
-        ? `/messages/${selectedUser._id}/new?since=${lastMessageTime}`
-        : `/messages/${selectedUser._id}`;
+  ? `/api/messages/${selectedUser._id}/new?since=${lastMessageTime}`
+  : `/api/messages/${selectedUser._id}`;
         
       const res = await axiosInstance.get(url);
       const newMessages = res.data;
@@ -117,7 +117,7 @@ export const useChatStore = create((set, get) => ({
       set({ messages: [...messages, tempMessage] });
 
       // Send message to server
-      const res = await axiosInstance.post(`/messages/send/${selectedUser._id}`, messageData);
+  const res = await axiosInstance.post(`/api/messages/send/${selectedUser._id}`, messageData);
       
       // Replace optimistic message with real message
       const currentMessages = get().messages;
@@ -143,7 +143,7 @@ export const useChatStore = create((set, get) => ({
 
   deleteMessage: async (messageId) => {
     try {
-      await axiosInstance.delete(`/messages/delete/${messageId}`);
+  await axiosInstance.delete(`/api/messages/delete/${messageId}`);
       
       // Remove message from local state immediately
       const { messages } = get();
@@ -160,7 +160,7 @@ export const useChatStore = create((set, get) => ({
     if (!selectedUser) return;
     
     try {
-      const res = await axiosInstance.delete(`/messages/clear/${selectedUser._id}`);
+  const res = await axiosInstance.delete(`/api/messages/clear/${selectedUser._id}`);
       
       // Remove all sent messages from local state
       const { messages } = get();
