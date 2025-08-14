@@ -29,8 +29,9 @@ export const useAuthStore = create((set, get) => ({
         return;
       }
       
-      console.log('CheckAuth - Making request to /auth/check');
-      const res = await axiosInstance.get("/auth/check");
+  const checkPath = import.meta.env.MODE === "development" ? "/auth/check" : "/api/auth/check";
+  console.log('CheckAuth - Making request to', checkPath);
+  const res = await axiosInstance.get(checkPath);
       console.log('CheckAuth - Success:', res.data);
       set({ authUser: res.data });
       get().connectSocket();
@@ -53,7 +54,8 @@ export const useAuthStore = create((set, get) => ({
     set({ isSigningUp: true });
     try {
       console.log('Attempting signup with:', data);
-      const res = await axiosInstance.post("/auth/signup", data);
+  const signupPath = import.meta.env.MODE === "development" ? "/auth/signup" : "/api/auth/signup";
+  const res = await axiosInstance.post(signupPath, data);
       console.log('Signup successful:', res.data);
       console.log('Token received:', !!res.data.token);
       
@@ -105,7 +107,8 @@ export const useAuthStore = create((set, get) => ({
     set({ isLoggingIn: true });
     try {
       console.log('Attempting login with:', data);
-  const res = await axiosInstance.post("/api/auth/login", data);
+      const loginPath = import.meta.env.MODE === "development" ? "/auth/login" : "/api/auth/login";
+      const res = await axiosInstance.post(loginPath, data);
       console.log('Login successful:', res.data);
       console.log('Token received:', !!res.data.token);
       
@@ -164,7 +167,8 @@ export const useAuthStore = create((set, get) => ({
 
   logout: async () => {
     try {
-      await axiosInstance.post("/auth/logout");
+  const logoutPath = import.meta.env.MODE === "development" ? "/auth/logout" : "/api/auth/logout";
+  await axiosInstance.post(logoutPath);
       
       // Clear token and auth header
       localStorage.removeItem('token');
@@ -188,7 +192,8 @@ export const useAuthStore = create((set, get) => ({
   updateProfile: async (data) => {
     set({ isUpdatingProfile: true });
     try {
-      const res = await axiosInstance.put("/auth/update-profile", data);
+  const updateProfilePath = import.meta.env.MODE === "development" ? "/auth/update-profile" : "/api/auth/update-profile";
+  const res = await axiosInstance.put(updateProfilePath, data);
       set({ authUser: res.data });
       
       // Show specific success messages based on what was updated
