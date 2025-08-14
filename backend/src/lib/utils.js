@@ -12,7 +12,7 @@ export const generateToken = (userId, res) => {
       httpOnly: true,
       sameSite: "none", // allow cross-site cookies
       secure: true,
-      domain: ".vercel.app", // allow cookies between frontend and backend on Vercel
+  domain: process.env.COOKIE_DOMAIN, // allow cookies between frontend and backend on Vercel
     });
     return token;
   }

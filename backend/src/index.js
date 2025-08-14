@@ -18,7 +18,7 @@ const __dirname = path.resolve();
 app.use(express.json({ limit: '10mb' }));
 app.use(cookieParser());
 const allowedOrigins = [
-  "https://mongochatfrontend.vercel.app",
+  process.env.FRONTEND_URL,
   "http://localhost:5173"
 ];
 
